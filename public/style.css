@@ -2386,7 +2386,6 @@ select.mobile-device {
     opacity: 0;
 }
 
-
 /*# sourceMappingURL=bootstrap-select.css.map */
 
 .bootstrap-select > .btn {
@@ -2477,7 +2476,6 @@ select.mobile-device {
     font-weight: 400;
     font-size: 20px;
     text-transform: capitalize;
-    line-height: !important;
 }
 
 .footer {
@@ -3113,8 +3111,6 @@ span.m_1 {
   top: 50%;
   width: 0;
 }
-
-
 
 #testimonial-box .testimonial h3{
 	color: #ffffff;
@@ -3869,19 +3865,3 @@ a.link-style3 {
 .course-meta-bot ul li:hover{
 	color: #eea412;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
