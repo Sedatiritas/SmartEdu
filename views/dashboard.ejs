@@ -64,6 +64,17 @@
 				<button class="btn btn-lg btn-warning rounded-0 text-white" href="#"
 					data-toggle="modal" data-target="#addCourse"><span>CREATE NEW
 						COURSE</span></button>
+						<% if (flashMessages) { %>
+							<% if (flashMessages.success) { %>
+							  <div class="alert alert-success mt-4">
+							<%= flashMessages.success %>
+							</div>
+						  <% } else if (flashMessages.error) { %>
+						   <div class="alert alert-danger mt-4">
+							<%= flashMessages.error %>
+							</div>
+							<% } %>
+						  <% } %>
 			</div>
 		<div class="col-12 blog-post-single">					
 			<div class="blog-author">
@@ -87,7 +98,12 @@
 						</div>
 						<div class="course-desc">
 							<p><%= courses[i].description%></p>
-							
+						</div>
+						<div>
+							<a class="btn btn-warning">Update</a>
+							<a href="/courses/<%= courses[i].slug%>?_method=DELETE"
+								onclick="return confirm('ARE YOU SURE')"
+								class="btn btn-danger">Delete</a>
 						</div>
 					</div>
 				</div>

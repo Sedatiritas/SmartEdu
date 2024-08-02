@@ -7,12 +7,15 @@ const Course = require('../models/Course');
 exports.createUser = async (req, res) => {
   try {
     const user = await User.create(req.body);
-
     res.status(201).redirect('/login');
   } catch (error) {
     const result = validationResult(req);
     console.log(result)
     console.log(result.array()[0].msg)
+    for(let i = 0 ; i < result.array().length ; i++) {
+      req.flash("error", `${result.array()[i].msg}`);
+    }
+    res.status(400).redirect('/register'); 
   }
 };
 
@@ -20,17 +23,18 @@ exports.loginUser = async (req, res) => {
   try {
     const { email, password } = req.body 
     const user = await User.findOne({ email })
-     if (!user) { res.status(400).send("kullanici yok")}
-
     const same = await bcrypt.compare(password, user.password)
     
-    req.session.userID = user._id
-     if (same) { res.status(200).redirect('/users/dashboard')}
+    if (same) { 
+      req.session.userID = user._id
+      res.status(200).redirect('/users/dashboard')
+    }else {
+      req.flash("error", "Your password is not correct");
+      res.status(400).redirect('/login')
+    }
   } catch (error) {
-    res.status(400).json({
-      status: 'fail',
-      error,
-    })
+    req.flash("error", "User is not exist");
+    res.status(400).redirect('/login')
   }
 }
 
